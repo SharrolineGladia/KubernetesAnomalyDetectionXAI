@@ -1,0 +1,116 @@
+# Anomaly Detection Project - .gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+venv/
+env/
+ENV/
+.venv/
+.env/
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Machine Learning Models
+*.pkl
+*.joblib
+*.h5
+*.model
+
+# Data files (keep essential ones in repo)
+# Remove comment from lines below to exclude large data files
+# data/*.csv
+# data/*.db
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+experiment_log_*.txt
+anomaly_experiments_log_*.txt
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Windows
+*.lnk
+
+# Docker
+.dockerignore
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Database files (optional - comment out if you want to keep them)
+# *.db
+# *.sqlite
+# *.sqlite3
+
+# Prometheus data
+prometheus_data/
+
+# Backup files
+*.bak
+*.backup
+
+# Temporary ML experiment files
+temp_*
+test_*
+scratch_*
+
+# Large dataset files (uncomment if datasets are too large for repo)
+# data/large_ml_dataset.csv
+# data/cleaned_ml_dataset.csv
+
+# Generated reports and outputs
+*.html
+*.pdf
+reports/
+outputs/
+
+# Cleanup scripts (temporary)
+cleanup_project.bat
+
+# Old/obsolete files
+*_old.*
+*_backup.*
+deprecated_*

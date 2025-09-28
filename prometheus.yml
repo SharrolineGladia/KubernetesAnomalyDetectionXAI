@@ -1,0 +1,46 @@
+# ==============================================================================
+# prometheus.yml - Prometheus Configuration
+# Save this file as: prometheus.yml
+# ==============================================================================
+
+global:
+  scrape_interval: 10s # Collect metrics every 10 seconds
+  evaluation_interval: 10s # Evaluate rules every 10 seconds
+
+# Scrape configuration
+scrape_configs:
+  # Web API Service
+  - job_name: "web-api"
+    static_configs:
+      - targets: ["192.168.111.15:8001"] # Host IP address
+    scrape_interval: 10s
+    metrics_path: "/metrics"
+    scheme: "http"
+
+  # Order Processor Service
+  - job_name: "order-processor"
+    static_configs:
+      - targets: ["192.168.111.15:8002"]
+    scrape_interval: 10s
+    metrics_path: "/metrics"
+    scheme: "http"
+
+  # Notification Service (metrics on HTTP port for simplicity)
+  - job_name: "notification-service"
+    static_configs:
+      - targets: ["192.168.111.15:8003"]
+    scrape_interval: 10s
+    metrics_path: "/metrics"
+    scheme: "http"
+
+  # Node Exporter for system metrics
+  - job_name: "node-exporter"
+    static_configs:
+      - targets: ["node-exporter:9100"]
+    scrape_interval: 10s
+
+  # Prometheus itself
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
+    scrape_interval: 30s
