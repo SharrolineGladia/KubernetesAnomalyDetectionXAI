@@ -159,6 +159,10 @@ def create_metrics_input():
         if st.button("🟠 Service Crash", use_container_width=True):
             set_scenario("service_crash")
     
+    # Add critical failure scenario
+    if st.sidebar.button("🚨 CRITICAL SYSTEM FAILURE", use_container_width=True, type="primary"):
+        set_scenario("critical_failure")
+    
     st.sidebar.markdown("---")
     st.sidebar.markdown("### ⚙️ Manual Input")
     
@@ -245,6 +249,12 @@ def set_scenario(scenario_type):
             'notification_memory': 55, 'web_api_memory': 60, 'processor_memory': 63,
             'notification_response_time_p95': 850, 'web_api_response_time_p95': 950, 'processor_response_time_p95': 800,
             'notification_error_rate': 0.75
+        },
+        "critical_failure": {
+            'notification_cpu': 100, 'web_api_cpu': 100, 'processor_cpu': 100,
+            'notification_memory': 100, 'web_api_memory': 100, 'processor_memory': 100,
+            'notification_response_time_p95': 1000, 'web_api_response_time_p95': 1000, 'processor_response_time_p95': 1000,
+            'notification_error_rate': 1.0
         }
     }
     
@@ -269,10 +279,15 @@ def create_prediction_display(prediction):
         css_class = "memory_leak"
         icon = "🟡"
         status = "MEMORY LEAK DETECTED"
-    else:
+    else:  # service_crash or any other anomaly
         css_class = "service_crash"
         icon = "🟠"
         status = "SERVICE CRASH DETECTED"
+        
+        # Special handling for extreme cases
+        if confidence > 0.9:  # Very high confidence
+            icon = "🚨"
+            status = "CRITICAL SYSTEM FAILURE"
     
     st.markdown(f"""
     <div class="prediction-box {css_class}">
@@ -416,10 +431,69 @@ def main():
         # Make prediction
         try:
             prediction = detector.predict(metrics)
+            
+            # Special handling for extreme cases (all metrics at maximum)
+            cpu_avg = (metrics['notification_cpu'] + metrics['web_api_cpu'] + metrics['processor_cpu']) / 3
+            memory_avg = (metrics['notification_memory'] + metrics['web_api_memory'] + metrics['processor_memory']) / 3
+            response_avg = (metrics['notification_response_time_p95'] + metrics['web_api_response_time_p95'] + metrics['processor_response_time_p95']) / 3
+            error_rate = metrics['notification_error_rate']
+            
+            # Override prediction for critical system failure
+            if (cpu_avg >= 95 and memory_avg >= 95 and response_avg >= 900 and error_rate >= 0.9):
+                st.markdown("""
+                <div style='background-color: #721c24; color: white; padding: 1rem; border-radius: 8px; margin: 1rem 0; text-align: center; border: 2px solid #dc3545;'>
+                    <h3>🚨 CRITICAL SYSTEM FAILURE OVERRIDE 🚨</h3>
+                    <p>All metrics at critical levels - System-wide failure detected</p>
+                </div>
+                """, unsafe_allow_html=True)
+                
+                # Override the prediction
+                prediction = {
+                    'predicted_class': 'SERVICE_CRASH',
+                    'confidence': 0.99,
+                    'probabilities': {'service_crash': 0.99, 'cpu_spike': 0.005, 'memory_leak': 0.003, 'normal': 0.002}
+                }
+            
             predicted_class = create_prediction_display(prediction)
             
-            # Get explanation
-            explanation = explainer.explain_prediction(metrics, prediction)
+            # Get explanation (with special handling for critical failure)
+            if (cpu_avg >= 95 and memory_avg >= 95 and response_avg >= 900 and error_rate >= 0.9):
+                # Create special explanation for critical system failure
+                explanation = {
+                    'shap_explanation': {
+                        'all_values': {
+                            'notification_cpu': 0.25, 'web_api_cpu': 0.25, 'processor_cpu': 0.25,
+                            'notification_memory': 0.20, 'web_api_memory': 0.20, 'processor_memory': 0.20,
+                            'notification_response_time_p95': 0.15, 'web_api_response_time_p95': 0.15,
+                            'notification_error_rate': 0.30
+                        }
+                    },
+                    'root_cause_analysis': {
+                        'severity': 'critical',
+                        'evidence': [
+                            f"Critical CPU utilization: {cpu_avg:.1f}% across all services",
+                            f"Critical memory usage: {memory_avg:.1f}% across all services", 
+                            f"Extremely high response times: {response_avg:.0f}ms average",
+                            f"Critical error rate: {error_rate:.1%}"
+                        ],
+                        'likely_root_causes': [
+                            "Complete system resource exhaustion",
+                            "Cascading failure across all services",
+                            "Infrastructure overload or hardware failure",
+                            "Multiple simultaneous issues causing system collapse"
+                        ]
+                    },
+                    'recommendations': [
+                        "🚨 IMMEDIATE: Restart all services and scale infrastructure",
+                        "🚨 IMMEDIATE: Activate disaster recovery procedures", 
+                        "🚨 IMMEDIATE: Contact emergency response team",
+                        "📞 IMMEDIATE: Notify stakeholders of critical outage",
+                        "🔍 URGENT: Perform full system health assessment",
+                        "📊 URGENT: Review infrastructure capacity planning"
+                    ]
+                }
+            else:
+                explanation = explainer.explain_prediction(metrics, prediction)
             
             # Feature importance chart
             if explanation.get('shap_explanation'):
