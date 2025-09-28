@@ -5,6 +5,7 @@ A comprehensive anomaly detection system for microservices with root cause analy
 ## 🎯 Project Overview
 
 This system provides:
+
 - **Real-time anomaly detection** using machine learning
 - **Root Cause Analysis (RCA)** through SHAP explainability
 - **Intelligent recovery recommendations** with confidence scoring
@@ -13,6 +14,7 @@ This system provides:
 ## 🏗️ System Architecture
 
 ### Core Components
+
 - **3 Microservices**: Web API, Order Processor, Notification Service
 - **Data Collector**: 31 comprehensive RCA metrics
 - **ML Engine**: Anomaly detection with explainability
@@ -29,11 +31,13 @@ This system provides:
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 ```bash
 pip install pandas scikit-learn shap matplotlib seaborn fastapi uvicorn
 ```
 
 ### Run the System
+
 ```bash
 # Start microservices
 ./start_services.bat
@@ -48,6 +52,7 @@ python dataset_report.py
 ## 📁 Key Files
 
 ### Core System
+
 - `web_api.py` - Web API microservice
 - `order_processor.py` - Order processing service
 - `notification_service.py` - Notification service
@@ -55,27 +60,32 @@ python dataset_report.py
 - `failure_injector.py` - Anomaly injection for testing
 
 ### ML & Analytics
+
 - `data/cleaned_ml_dataset.csv` - Main ML dataset (4K samples)
 - `run_anomaly_experiments.py` - Experiment orchestrator
 - `dataset_report.py` - Dataset validation report
 
 ### Configuration
+
 - `docker-compose.yml` - Container orchestration
 - `prometheus.yml` - Monitoring configuration
 
 ## 🎯 Implementation Plan
 
 ### Phase 1: Detection & RCA
+
 - [x] Dataset collection and validation
 - [x] ML model training with explainability
 - [x] SHAP-based root cause analysis
 
 ### Phase 2: Recovery Intelligence
+
 - [ ] Decision tree for recovery recommendations
 - [ ] Natural language explanation generator
 - [ ] Confidence scoring for actions
 
 ### Phase 3: Integration
+
 - [ ] End-to-end pipeline integration
 - [ ] Real-time detection API
 - [ ] Performance evaluation
@@ -98,7 +108,7 @@ python dataset_report.py
 
 - **Baseline Experiment**: Normal operations (30 min)
 - **CPU Spike**: Resource overload simulation (20 min)
-- **Memory Leak**: Progressive memory growth (20 min) 
+- **Memory Leak**: Progressive memory growth (20 min)
 - **Service Crash**: Failure and recovery cycles (15 min)
 
 ## 📈 Performance Metrics
@@ -111,6 +121,7 @@ python dataset_report.py
 ## 🤝 Contributing
 
 This project supports collaborative development:
+
 - **Person A**: ML Engine & RCA (2 hours)
 - **Person B**: Recovery System & Integration (2 hours)
 
@@ -138,6 +149,7 @@ numpy>=1.24.0
 ## 📞 Support
 
 For questions or collaboration:
+
 - Review the `dataset_report.py` output for validation details
 - Check experiment logs in `data/` folder
 - Refer to individual service documentation
