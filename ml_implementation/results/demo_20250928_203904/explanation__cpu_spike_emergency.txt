@@ -1,0 +1,26 @@
+ANOMALY DETECTION EXPLANATION REPORT
+==================================================
+
+Predicted Anomaly: CPU_SPIKE
+Confidence: 74.5%
+Severity: MEDIUM
+
+FEATURE ANALYSIS
+--------------------
+processor_cpu: 88.00 (ANOMALOUS)
+web_api_cpu: 90.00 (ANOMALOUS)
+notification_cpu: 85.00 (ANOMALOUS)
+
+ROOT CAUSES
+--------------------
+1. High CPU utilization across services
+2. Resource contention between processes
+3. Inefficient algorithms or infinite loops
+4. Sudden spike in request volume
+
+RECOMMENDATIONS
+--------------------
+1. Scale up CPU resources or add more instances
+2. Implement CPU-based auto-scaling
+3. Profile code for CPU-intensive operations
+4. Add request rate limiting and load balancing

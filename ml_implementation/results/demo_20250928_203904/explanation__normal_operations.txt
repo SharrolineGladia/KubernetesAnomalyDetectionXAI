@@ -1,0 +1,21 @@
+ANOMALY DETECTION EXPLANATION REPORT
+==================================================
+
+Predicted Anomaly: NORMAL
+Confidence: 98.7%
+Severity: LOW
+
+FEATURE ANALYSIS
+--------------------
+processor_cpu: 20.00 (NORMAL)
+processor_memory: 48.00 (NORMAL)
+
+ROOT CAUSES
+--------------------
+1. System operating within normal parameters
+2. All services healthy and responsive
+
+RECOMMENDATIONS
+--------------------
+1. Continue monitoring for any changes
+2. Maintain current resource allocation

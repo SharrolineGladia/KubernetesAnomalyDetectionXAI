@@ -1,0 +1,26 @@
+ANOMALY DETECTION EXPLANATION REPORT
+==================================================
+
+Predicted Anomaly: MEMORY_LEAK
+Confidence: 95.5%
+Severity: HIGH
+
+FEATURE ANALYSIS
+--------------------
+processor_memory: 92.00 (ANOMALOUS)
+web_api_memory: 88.00 (ANOMALOUS)
+notification_memory: 85.00 (ANOMALOUS)
+
+ROOT CAUSES
+--------------------
+1. Memory not being properly released
+2. Accumulating objects in memory
+3. Large data structures not being cleaned up
+4. Connection pooling issues
+
+RECOMMENDATIONS
+--------------------
+1. Implement proper memory cleanup and garbage collection
+2. Review object lifecycle management
+3. Add memory monitoring and alerts
+4. Implement connection pooling limits

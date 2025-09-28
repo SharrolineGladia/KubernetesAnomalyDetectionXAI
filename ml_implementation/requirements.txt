@@ -1,0 +1,18 @@
+# Explainable Anomaly Detection System Requirements
+# ================================================
+
+# Core ML packages for anomaly detection
+pandas>=1.5.0
+numpy>=1.21.0
+scikit-learn>=1.1.0
+joblib>=1.2.0
+
+# Visualization packages
+matplotlib>=3.5.0
+seaborn>=0.11.0
+
+# Explainable AI
+shap>=0.48.0
+
+# Progress bars
+tqdm>=4.65.0
