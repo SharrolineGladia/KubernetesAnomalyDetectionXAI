@@ -61,17 +61,17 @@ echo.
 
 REM Start Web API Service
 echo 📡 Starting Web API Service (Port 8001)...
-start "Web API Service" cmd /c "python web_api.py & pause"
+start "Web API Service" cmd /c "cd ../services && python web_api.py & pause"
 timeout /t 3 /nobreak >nul
 
 REM Start Order Processor Service
 echo 📦 Starting Order Processor Service (Port 8002)...
-start "Order Processor Service" cmd /c "python order_processor.py & pause"
+start "Order Processor Service" cmd /c "cd ../services && python order_processor.py & pause"
 timeout /t 3 /nobreak >nul
 
 REM Start Notification Service
 echo 📬 Starting Notification Service (Port 8003)...
-start "Notification Service" cmd /c "python notification_service.py & pause"
+start "Notification Service" cmd /c "cd ../services && python notification_service.py & pause"
 timeout /t 5 /nobreak >nul
 
 echo ⏳ Waiting for services to start...

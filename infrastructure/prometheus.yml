@@ -12,7 +12,7 @@ scrape_configs:
   # Web API Service
   - job_name: "web-api"
     static_configs:
-      - targets: ["192.168.111.15:8001"] # Host IP address
+      - targets: ["10.184.118.15:8001"] # Host IP address
     scrape_interval: 10s
     metrics_path: "/metrics"
     scheme: "http"
@@ -20,7 +20,7 @@ scrape_configs:
   # Order Processor Service
   - job_name: "order-processor"
     static_configs:
-      - targets: ["192.168.111.15:8002"]
+      - targets: ["10.184.118.15:8002"]
     scrape_interval: 10s
     metrics_path: "/metrics"
     scheme: "http"
@@ -28,7 +28,7 @@ scrape_configs:
   # Notification Service (metrics on HTTP port for simplicity)
   - job_name: "notification-service"
     static_configs:
-      - targets: ["192.168.111.15:8003"]
+      - targets: ["10.184.118.15:8003"]
     scrape_interval: 10s
     metrics_path: "/metrics"
     scheme: "http"

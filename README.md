@@ -11,6 +11,51 @@ This system provides:
 - **Intelligent recovery recommendations** with confidence scoring
 - **Multi-class anomaly classification** (CPU spikes, memory leaks, service crashes)
 
+## 📁 Project Structure
+
+Our project follows a professional, modular organization:
+
+```
+📁 demo_project/
+├── 🔧 services/              # Core microservices
+│   ├── web_api.py            # Web API service (Port 8001)
+│   ├── order_processor.py    # Order processing (Port 8002)
+│   ├── notification_service.py # Notification system (Port 8003)
+│   └── data_collector.py     # Prometheus metrics collector
+├── 🧪 experiments/           # Experiment scripts & testing
+│   ├── run_experiments.py    # Main experiment suite
+│   ├── run_anomaly_experiments.py # Anomaly detection tests
+│   ├── failure_injector.py   # Controlled anomaly injection
+│   └── [specific experiment scripts]
+├── 🏗️ infrastructure/        # System setup & configuration
+│   ├── docker-compose.yml    # Container orchestration
+│   ├── prometheus.yml        # Monitoring configuration
+│   ├── start_services.bat    # Service startup script
+│   └── stop_services.bat     # Service shutdown script
+├── 📚 docs/                  # Project documentation
+│   ├── IMPLEMENTATION_SUMMARY.md  # Key project summary
+│   ├── CLEAN_SUMMARY.md      # Clean overview
+│   └── PROJECT_FLOW_DOCUMENTATION.txt
+├── 🛠️ tools/                 # Development utilities
+│   ├── dataset_report.py     # Dataset analysis tool
+│   ├── load_generator.py     # Traffic generation utility
+│   └── project_summary.py    # Project analysis tool
+├── 🤖 ml_implementation/     # Machine learning system
+│   ├── anomaly_detector.py   # Core ML engine (97.5% accuracy)
+│   ├── explainability_rca.py # SHAP-based explanations
+│   ├── integrated_demo.py    # Complete ML demonstration
+│   ├── baseline_comparison/  # Research & baseline studies
+│   └── results/             # Generated outputs & visualizations
+├── 🖥️ ui/                    # User interface
+│   ├── streamlit_demo.py     # Interactive web dashboard
+│   └── launch_demo.py        # UI launcher
+├── 📊 data/                  # Dataset storage
+│   └── [database files]
+├── 📝 README.md              # Project documentation (this file)
+├── 📋 USAGE.md               # Detailed usage instructions
+└── 🐍 venv/                  # Python environment
+```
+
 ## 🏗️ System Architecture
 
 ### Core Components
@@ -36,28 +81,89 @@ This system provides:
 pip install pandas scikit-learn shap matplotlib seaborn fastapi uvicorn
 ```
 
-### Run the System
+### Option 1: Complete System Startup
 
 ```bash
-# Start microservices
-./start_services.bat
+# 1. Start all microservices
+infrastructure/start_services.bat
 
-# Run anomaly detection
-python run_anomaly_experiments.py
+# 2. Run anomaly detection experiments
+python experiments/run_anomaly_experiments.py
 
-# Generate dataset report
-python dataset_report.py
+# 3. Launch interactive UI
+cd ui && python launch_demo.py
+```
+
+### Option 2: Step-by-Step Setup
+
+```bash
+# Start individual components
+cd infrastructure
+start_services.bat              # Start all services
+
+cd ../experiments
+python run_experiments.py      # Run complete experiment suite
+
+cd ../ml_implementation
+python integrated_demo.py      # Run ML demonstration
+
+cd ../tools
+python dataset_report.py       # Generate dataset analysis
+```
+
+### Option 3: Docker Environment
+
+```bash
+cd infrastructure
+docker-compose up -d           # Start with Docker
+```
+
+## 📂 Key Directories & Usage
+
+### 🔧 `/services/` - Core Microservices
+
+```bash
+cd services
+python web_api.py              # Start Web API (Port 8001)
+python order_processor.py      # Start Order Processor (Port 8002)
+python notification_service.py # Start Notifications (Port 8003)
+```
+
+### 🧪 `/experiments/` - Testing & Validation
+
+```bash
+cd experiments
+python run_anomaly_experiments.py  # Main anomaly detection tests
+python failure_injector.py cpu-spike # Manual anomaly injection
+python run_specific_experiment.py   # Custom experiment scenarios
+```
+
+### 🤖 `/ml_implementation/` - Machine Learning
+
+```bash
+cd ml_implementation
+python integrated_demo.py          # Complete ML demonstration
+python anomaly_detector.py         # Train/test ML models
+cd baseline_comparison && python research_comparison.py # Research analysis
+```
+
+### 🖥️ `/ui/` - User Interface
+
+```bash
+cd ui
+python launch_demo.py              # Launch interactive dashboard
+streamlit run streamlit_demo.py    # Direct Streamlit access
 ```
 
 ## 📁 Key Files
 
 ### Core System
 
-- `web_api.py` - Web API microservice
-- `order_processor.py` - Order processing service
-- `notification_service.py` - Notification service
-- `data_collector.py` - Metrics collection system
-- `failure_injector.py` - Anomaly injection for testing
+- `services/web_api.py` - Web API microservice
+- `services/order_processor.py` - Order processing service
+- `services/notification_service.py` - Notification service
+- `services/data_collector.py` - Metrics collection system
+- `experiments/failure_injector.py` - Anomaly injection for testing
 
 ### ML & Analytics
 
@@ -67,16 +173,17 @@ python dataset_report.py
 
 ### Configuration
 
-- `docker-compose.yml` - Container orchestration
-- `prometheus.yml` - Monitoring configuration
+- `infrastructure/docker-compose.yml` - Container orchestration
+- `infrastructure/prometheus.yml` - Monitoring configuration
 
 ## 🎯 Implementation Plan
 
-### Phase 1: Detection & RCA
+### Phase 1: Detection & RCA ✅
 
-- [x] Dataset collection and validation
-- [x] ML model training with explainability
+- [x] Dataset collection and validation (3,137 samples)
+- [x] ML model training with explainability (97.5% accuracy)
 - [x] SHAP-based root cause analysis
+- [x] Professional project organization
 
 ### Phase 2: Recovery Intelligence
 
@@ -89,6 +196,50 @@ python dataset_report.py
 - [ ] End-to-end pipeline integration
 - [ ] Real-time detection API
 - [ ] Performance evaluation
+
+## 🎨 Project Organization Benefits
+
+Our structured approach provides:
+
+- ✅ **Professional Organization**: Industry-standard folder structure
+- ✅ **Easy Navigation**: Find files by purpose instantly
+- ✅ **Team Collaboration**: Clear separation of concerns
+- ✅ **Scalable Architecture**: Easy to extend and maintain
+- ✅ **Development Efficiency**: Faster development and debugging
+
+## 🔄 Workflow Examples
+
+### Development Workflow
+
+```bash
+# 1. Start development environment
+infrastructure/start_services.bat
+
+# 2. Run experiments for testing
+cd experiments && python run_anomaly_experiments.py
+
+# 3. Develop ML improvements
+cd ml_implementation && python integrated_demo.py
+
+# 4. Test with UI
+cd ui && python launch_demo.py
+```
+
+### Research Workflow
+
+```bash
+# 1. Generate datasets
+cd experiments && python run_experiments.py
+
+# 2. Analyze results
+cd tools && python dataset_report.py
+
+# 3. Run baseline comparisons
+cd ml_implementation/baseline_comparison && python research_comparison.py
+
+# 4. Review documentation
+# Check docs/ folder for detailed analysis
+```
 
 ## 📊 Dataset Statistics
 
@@ -120,10 +271,54 @@ python dataset_report.py
 
 ## 🤝 Contributing
 
-This project supports collaborative development:
+This project supports collaborative development with clear structure:
 
-- **Person A**: ML Engine & RCA (2 hours)
-- **Person B**: Recovery System & Integration (2 hours)
+- **Services Team**: Focus on `services/` directory - microservices development
+- **ML Team**: Work in `ml_implementation/` - model training & analysis
+- **Experiments Team**: Use `experiments/` - testing & validation scripts
+- **DevOps Team**: Manage `infrastructure/` - deployment & configuration
+- **UI Team**: Develop in `ui/` - user interface & visualization
+- **Documentation Team**: Maintain `docs/` - project documentation
+
+### Development Guidelines
+
+1. **Follow the folder structure** - Keep related files together
+2. **Update paths** - Use relative paths appropriate to your working directory
+3. **Document changes** - Update relevant README files in subdirectories
+4. **Test integration** - Ensure cross-folder dependencies work correctly
+
+## 🆘 Troubleshooting & Support
+
+### Common Issues
+
+**Services won't start?**
+
+```bash
+cd infrastructure
+./start_services.bat    # Make sure to run from infrastructure folder
+```
+
+**Import errors in ML code?**
+
+```bash
+cd ml_implementation    # Run ML scripts from their directory
+python integrated_demo.py
+```
+
+**Experiment scripts failing?**
+
+```bash
+cd experiments          # Run experiments from their directory
+python run_anomaly_experiments.py
+```
+
+### Getting Help
+
+- **Quick Setup**: Check `USAGE.md` for detailed usage instructions
+- **Project Structure**: This README explains the organization
+- **Implementation Details**: See `docs/IMPLEMENTATION_SUMMARY.md`
+- **ML Analysis**: Review `ml_implementation/baseline_comparison/` for research details
+- **Dataset Info**: Run `tools/dataset_report.py` for data analysis
 
 ## 📋 Dependencies
 

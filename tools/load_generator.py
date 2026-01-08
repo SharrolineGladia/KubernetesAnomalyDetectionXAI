@@ -268,7 +268,8 @@ async def test_load_generator():
                     
     except Exception as e:
         print(f"❌ Web API not accessible: {e}")
-        print("   Make sure to start: python web_api.py")
+        print("   Make sure to start: python ../services/web_api.py")
+        print("   Or run: ../infrastructure/start_services.bat")
         return
     
     # Generate some test traffic

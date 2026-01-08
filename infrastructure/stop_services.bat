@@ -31,7 +31,7 @@ for /f "tokens=5" %%a in ('netstat -ano ^| findstr :8003 ^| findstr LISTENING') 
 
 REM Kill any remaining Python processes with our service names in command line
 echo 🧹 Cleaning up remaining processes...
-wmic process where "name='python.exe' and (commandline like '%%web_api.py%%' or commandline like '%%order_processor.py%%' or commandline like '%%notification_service.py%%')" delete >nul 2>&1
+wmic process where "name='python.exe' and (commandline like '%%services\web_api.py%%' or commandline like '%%services\order_processor.py%%' or commandline like '%%services\notification_service.py%%')" delete >nul 2>&1
 
 REM Close service windows
 echo 🪟 Closing service windows...

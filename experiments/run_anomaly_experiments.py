@@ -25,7 +25,7 @@ async def run_anomaly_experiments_only():
     if not orchestrator.check_services():
         print("\n❌ Services not running. Please start them first:")
         print("   1. Services should already be running")
-        print("   2. If not: run start_services.bat")
+        print("   2. If not: run ../infrastructure/start_services.bat")
         return
     
     # Check if baseline exists

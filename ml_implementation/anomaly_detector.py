@@ -10,6 +10,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 from sklearn.preprocessing import LabelEncoder
 import joblib
+from xgboost import XGBClassifier
 from datetime import datetime
 import warnings
 import matplotlib.pyplot as plt
@@ -22,7 +23,7 @@ class AnomalyDetector:
     
     Features:
     - Multi-class anomaly classification (normal, cpu_spike, memory_leak, service_crash)
-    - High-performance Random Forest classifier
+    - High-performance XGBoost classifier
     - Simple prediction interface
     - Model persistence
     """
@@ -34,7 +35,7 @@ class AnomalyDetector:
         self.model_metrics = {}
         self.is_trained = False
         
-    def load_and_prepare_data(self, dataset_path='metrics_dataset.csv'):
+    def load_and_prepare_data(self, dataset_path='metrics_dataset_enhanced_rounded.csv'):
         """
         Load and prepare the dataset for training
         
@@ -95,18 +96,20 @@ class AnomalyDetector:
     
     def train_model(self, X_train, y_train):
         """
-        Train the Random Forest model
+        Train the XGBoost model
         """
-        print("🚀 Training Random Forest model...")
+        print("🚀 Training XGBoost model...")
         
-        # Initialize Random Forest
-        self.model = RandomForestClassifier(
-            n_estimators=100,
-            max_depth=15,
-            min_samples_split=5,
-            min_samples_leaf=2,
+        # Initialize XGBoost
+        self.model = XGBClassifier(
+            n_estimators=200,
+            max_depth=6,
+            learning_rate=0.1,
+            subsample=0.8,
+            colsample_bytree=0.8,
             random_state=42,
-            n_jobs=-1
+            eval_metric='mlogloss',
+            verbosity=0
         )
         
         # Train the model
@@ -266,7 +269,7 @@ class AnomalyDetector:
                    linecolor='white')
         
         # Customize the plot with larger fonts
-        plt.title('Anomaly Detection Model - Confusion Matrix', 
+        plt.title('XGBoost Anomaly Detection - Confusion Matrix', 
                  fontsize=20, fontweight='bold', pad=30)
         plt.xlabel('Predicted Class', fontsize=16, fontweight='bold', labelpad=15)
         plt.ylabel('Actual Class', fontsize=16, fontweight='bold', labelpad=15)
@@ -318,7 +321,7 @@ class AnomalyDetector:
         # Customize the plot
         plt.yticks(range(len(top_features)), top_features['feature'], fontsize=12)
         plt.xlabel('Feature Importance Score', fontsize=14, fontweight='bold', labelpad=15)
-        plt.title('Top 15 Most Important Features for Anomaly Detection', 
+        plt.title('XGBoost - Top 15 Most Important Features for Anomaly Detection', 
                  fontsize=18, fontweight='bold', pad=25)
         
         # Add value labels on bars with better formatting

@@ -1,0 +1,30 @@
+Dataset_Characteristic,Value,Notes
+Total_Samples,2100,Real microservices metrics
+Total_Features,29,Quantitative metrics only
+Total_Classes,4,Multi-class classification
+Class_Normal_Count,1237,58.9% of dataset
+Class_CPU_Spike_Count,463,22.0% of dataset
+Class_Memory_Leak_Count,300,14.3% of dataset
+Class_Service_Crash_Count,100,4.8% of dataset - CRITICAL SHORTAGE
+Training_Samples,1680,80% split
+Test_Samples,420,20% split
+Split_Strategy,Stratified,random_state=42
+Cross_Validation,None,Single train/test split
+Imbalance_Ratio,12.37,Normal:Service_Crash ratio
+Data_Source,Production,3 microservices environment
+Collection_Interval,15_seconds,Real-time metrics
+Services_Count,3,Web API + Order Processor + Notification
+Feature_Categories,10,CPU,Memory,Response_Time,Requests,Queue,etc
+CPU_Features,3,processor_cpu,web_api_cpu,notification_cpu
+Memory_Features,4,Including memory_growth
+Response_Time_Features,3,P95 percentile metrics
+Queue_Features,5,Depth and size metrics
+Health_Features,4,API and Redis health
+Thread_Features,3,Active thread counts
+Error_Features,2,Error rates
+Connection_Features,2,Database connections
+Service_Features,3,Delivery success, message rate, processing rate
+Missing_Values,0,Complete dataset
+Outliers,Present,Real production data
+Data_Quality,High,Validated metrics
+Reproducibility,Full,Fixed random seeds

@@ -2,7 +2,7 @@ ANOMALY DETECTION EXPLANATION REPORT
 ==================================================
 
 Predicted Anomaly: CPU_SPIKE
-Confidence: 74.5%
+Confidence: 99.9%
 Severity: MEDIUM
 
 FEATURE ANALYSIS

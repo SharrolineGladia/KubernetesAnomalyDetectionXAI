@@ -2,7 +2,7 @@ ANOMALY DETECTION EXPLANATION REPORT
 ==================================================
 
 Predicted Anomaly: NORMAL
-Confidence: 98.7%
+Confidence: 100.0%
 Severity: LOW
 
 FEATURE ANALYSIS
